@@ -39,7 +39,7 @@
         combo_ctrl_backspace {
             timeout-ms = <80>;
             key-positions = <11 18>; // ri
-            bindings = <&mkp LC(BSPC)>;
+            bindings = <&kp LC(BSPC)>;
         };
         combo_backspace {
             timeout-ms = <80>;
