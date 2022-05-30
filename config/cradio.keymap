@@ -7,96 +7,87 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/mouse.h>
 
+// Layer definitions
+    #define BASE 0
+    #define NUM 1
+    #define SYM 2
+    #define FNC 3
+// -----------------
 
 &mt {
-  //  flavor = "tap-preferred";
-   // tapping_term_ms = <200>;
+   flavor = "tap-preferred";
+   tapping_term_ms = <150>;
 };
 
-/ { 
+/ {
 
     combos {
         compatible = "zmk,combos";
-        combo_esc {
-            timeout-ms = <50>;
-            key-positions = <0 1>;
-            bindings = <&kp ESC>;
+        combo_enter {
+            timeout-ms = <80>;
+            key-positions = <13 16>; // tn
+            bindings = <&kp ENTER>;
         };
-        
-         combo_tab {
-            timeout-ms = <50>;
-            key-positions = <10 11>;
+        combo_ctrl_backspace {
+            timeout-ms = <80>;
+            key-positions = <11 18>; // ri
+            bindings = <&mkp LC(BSPC)>;
+        };
+        combo_backspace {
+            timeout-ms = <80>;
+            key-positions = <22 27>; // c,
+            bindings = <&kp BSPC>;
+        };
+        combo_tab {
+            timeout-ms = <80>;
+            key-positions = <31 32>; // double radial thumb keys
             bindings = <&kp TAB>;
         };
-        
-            combo_ralt {
-            timeout-ms = <50>;
-            key-positions = <17 16>;
-            bindings = <&kp RALT>;
-        };
-        
-                    combo_lalt {
-            timeout-ms = <50>;
-            key-positions = <11 12>;
-            bindings = <&kp LALT>;
-        };
-        
-                           combo_lgui {
-            timeout-ms = <50>;
-            key-positions = <12 13>;
-            bindings = <&kp LGUI>;
-        };
-        
-        
-           combo_rgui {
-            timeout-ms = <50>;
-            key-positions = <17 18>;
-            bindings = <&kp RGUI>;
-        };
-        
-
-        
     };
 
-        keymap {
-                compatible = "zmk,keymap";
-                
-       		default_layer {
-		bindings = <
-		&kp Q &kp W &kp E &kp R &kp T 						&kp Y &kp U  &kp I    &kp O   &kp P 
-		&kp A &kp S &kp D &kp F &kp G 			        	        &kp H &kp J &kp K &kp L &kp QUOT
-		&mt LSFT Z &kp X &kp C &kp V &kp B				        &kp N &kp M  &kp CMMA &kp DOT &mt LSFT RET
-          				&mo 1 &kp LCTL  				&kp SPC &mo 2 
-		>;
-		};
+    keymap {
+            compatible = "zmk,keymap";
 
-       		left_layer {
-		bindings = <
-		&kp NUM_1  &kp NUM_2    &kp NUM_3    &kp NUM_4    &kp NUM_5		&kp NUM_6 &kp NUM_7 &kp NUM_8 &kp NUM_9 &kp NUM_0 
-		&kp TAB    &kp LC(S)    &kp DQT      &kp PIPE2     &kp HASH 		&kp MINUS &kp EQL  &kp LBKT &kp RBKT  &kp DEL 
-		&kp ESC    &kp TILDE 	&kp NON_US_BSLH &kp NON_US_HASH  &kp TILDE2 	&kp MINUS &kp GRAVE &kp LBKT &kp RBKT  &kp DEL 
-					    &mo 1  &kp LGUI  					&kp RGUI &mo 2 
-		>;
-		};
-		
-		right_layer {
-		bindings = <
-		&kp BANG  &kp ATSN &kp HASH  &kp DLLR  &kp PRCT    			&kp CRRT  &kp AMPS &kp KMLT &kp LPRN &kp RPRN 
-		&kp HASH  &kp QMARK  &kp FSLH  &kp COLN  &kp SCLN 			&kp MINUS &kp KP_EQUAL  &kp LBRC  &kp RBRC   &kp BKSP
-		&kp LSFT  &kp KPLS &kp LBKT &kp RBKT   &kp BSLH    			&kp UNDER &kp LEFT &kp DOWN &kp UP  &kp RIGHT
-					  &mo 3 &kp LCTL  				&kp SPC  &mo 2 
-		>;
-		};	
-		
-		tri_layer {
-		bindings = <
-		&kp NUM_1  &kp NUM_2    &kp NUM_3    &kp NUM_4    &kp NUM_5 			&trans &trans   &trans   &trans  &trans
-		&kp F1 &kp F2 &kp F3 &kp F4 &kp F5  						&trans &kp PG_UP  &kp K_VOL_UP &kp K_MUTE &trans 
-		&bt BT_CLR  &bt BT_NXT &bt BT_PRV &kp F6 &kp F7   				&trans &kp PG_DN  &kp K_VOL_DN  &trans &trans   
-					 &trans &trans  					&trans &trans 
-		>;
-		};	
-        
-	};
+        // Base alpha layer
+               default_layer {
+        bindings = <
+        &kp Q       &kp W   &kp F      &kp P     &kp B           &kp J      &kp L     &kp U     &kp Y   &kp SINGLE_QUOTE
+        &kp A       &kp R   &kp S      &lt FUN T &kp G           &kp M      &lt NUM N &lt SYM E &kp I   &kp O
+        &mt LCTRL Z &kp X   &mt RALT C &kp D     &kp B           &kp K      &kp H     &kp COMMA &kp DOT &mt RCTRL SLASH
+                                       &kp LGUI  &kp SPACE       &kp LSHIFT &mo FUN
+        >;
+        };
+
+        // Numbers and high frequency symbols
+               num_layer {
+        bindings = <
+        &kp LEFT_BRACKET &kp N7 &kp N8 &kp N9 &kp RBKT        &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &mkp LCLK
+        &kp SEMICOLON    &kp N4 &kp N5 &kp N6 &kp EQUAL       &kp LEFT_ARROW &kp DOWN_ARROW &kp UP_ARROW &kp RIGHT_ARROW &mkp MCLK
+        &kp GRAVE        &kp N1 &kp N2 &kp N3 &kp BSLH        &kp HOME       &kp PAGE_DOWN  &kp PAGE_UP  &kp END         &mkp RCLK
+                                       &kp N0 &kp MINUS       &kp LSHIFT     &kp TAB
+        >;
+        };
+
+        // Numbers + Shift (= Symbols)
+        sym_layer {
+        bindings = <
+        &kp LS(LEFT_BRACKET) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(RBKT)        &none &none &none &none &none
+        &kp LS(SEMICOLON)    &kp LS(N4) &kp LS(N5) &kp LS(N6) &kp LS(EQUAL)       &none &none &none &none &none
+        &kp LS(GRAVE)        &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp LS(BSLH)        &none &none &none &none &none
+                                                   &kp LS(N0) &kp LS(MINUS)       &none &none
+        >;
+        LS(};)
+
+        // Function keys (right half is the same as number)
+               fnc_layer {
+        bindings = <
+        &kp F12 &kp F7 &kp F8 &kp F9 &none       &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &mkp LCLK
+        &kp F11 &kp F4 &kp F5 &kp F6 &none       &kp LEFT_ARROW &kp DOWN_ARROW &kp UP_ARROW &kp RIGHT_ARROW &mkp MCLK
+        &kp F10 &kp F1 &kp F2 &kp F3 &none       &kp HOME       &kp PAGE_DOWN  &kp PAGE_UP  &kp END         &mkp RCLK
+                              &none  &none       &kp LSHIFT     &kp TAB
+        >;
+        };
+    };
 };
