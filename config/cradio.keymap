@@ -16,12 +16,18 @@
     #define FNC 3
 // -----------------
 
-&mt {
-   flavor = "tap-preferred";
-   tapping_term_ms = <150>;
-};
-
 / {
+
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "homerow mods";
+            #binding-cells = <2>;
+            tapping_term_ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+    };
 
     combos {
         compatible = "zmk,combos";
@@ -55,7 +61,7 @@
         bindings = <
         &kp Q       &kp W   &kp F      &kp P     &kp B           &kp J      &kp L     &kp U     &kp Y   &kp SINGLE_QUOTE
         &kp A       &kp R   &kp S      &lt FUN T &kp G           &kp M      &lt NUM N &lt SYM E &kp I   &kp O
-        &mt LCTRL Z &kp X   &mt RALT C &kp D     &kp B           &kp K      &kp H     &kp COMMA &kp DOT &mt RCTRL SLASH
+        &hm LCTRL Z &kp X   &hm RALT C &kp D     &kp B           &kp K      &kp H     &kp COMMA &kp DOT &hm RCTRL SLASH
                                        &kp LGUI  &kp SPACE       &kp LSHIFT &mo FUN
         >;
         };
